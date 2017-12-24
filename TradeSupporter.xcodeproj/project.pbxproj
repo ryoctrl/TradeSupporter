@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29AF02D4B737F255F5268A6F /* Pods_TradeSupporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7CF21B556C8FF8760E28896 /* Pods_TradeSupporter.framework */; };
+		5157217B1FEF2925007E901C /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5157217A1FEF2925007E901C /* Charts.framework */; };
+		5157217C1FEF29E7007E901C /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5157217A1FEF2925007E901C /* Charts.framework */; };
+		5157217D1FEF29E7007E901C /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5157217A1FEF2925007E901C /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5157217F1FF012E4007E901C /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5157217E1FF012E4007E901C /* Const.swift */; };
+		515721821FF01A45007E901C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515721811FF01A45007E901C /* API.swift */; };
+		515721861FF01B2B007E901C /* Gryphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 515721871FF01B2B007E901C /* Gryphon.framework */; };
+		5157218B1FF02094007E901C /* BitBankAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5157218A1FF02094007E901C /* BitBankAPI.swift */; };
+		5157218F1FF027A2007E901C /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 515721901FF027A2007E901C /* SwiftyJSON.framework */; };
+		517557391FEEEB6500A59051 /* PubNub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 517557381FEEEB6500A59051 /* PubNub.framework */; };
+		5175573A1FEEEB9D00A59051 /* PubNub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 517557381FEEEB6500A59051 /* PubNub.framework */; };
+		5175573B1FEEEB9D00A59051 /* PubNub.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 517557381FEEEB6500A59051 /* PubNub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		51EB31471FEEEA2700A39A24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EB31461FEEEA2700A39A24 /* AppDelegate.swift */; };
 		51EB31491FEEEA2700A39A24 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EB31481FEEEA2700A39A24 /* ViewController.swift */; };
 		51EB314C1FEEEA2700A39A24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51EB314A1FEEEA2700A39A24 /* Main.storyboard */; };
@@ -33,7 +45,29 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5175573C1FEEEB9D00A59051 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5175573B1FEEEB9D00A59051 /* PubNub.framework in Embed Frameworks */,
+				5157217D1FEF29E7007E901C /* Charts.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		5157217A1FEF2925007E901C /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Charts.framework; sourceTree = "<group>"; };
+		5157217E1FF012E4007E901C /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		515721811FF01A45007E901C /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		515721871FF01B2B007E901C /* Gryphon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Gryphon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5157218A1FF02094007E901C /* BitBankAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitBankAPI.swift; sourceTree = "<group>"; };
+		515721901FF027A2007E901C /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		517557381FEEEB6500A59051 /* PubNub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PubNub.framework; sourceTree = "<group>"; };
 		51EB31431FEEEA2700A39A24 /* TradeSupporter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradeSupporter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51EB31461FEEEA2700A39A24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51EB31481FEEEA2700A39A24 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +81,9 @@
 		51EB31621FEEEA2800A39A24 /* TradeSupporterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TradeSupporterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		51EB31661FEEEA2800A39A24 /* TradeSupporterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeSupporterUITests.swift; sourceTree = "<group>"; };
 		51EB31681FEEEA2800A39A24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A518485EAD6F716643F14C77 /* Pods-TradeSupporter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TradeSupporter.release.xcconfig"; path = "Pods/Target Support Files/Pods-TradeSupporter/Pods-TradeSupporter.release.xcconfig"; sourceTree = "<group>"; };
+		D7CF21B556C8FF8760E28896 /* Pods_TradeSupporter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TradeSupporter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8DF403FE819573213BB84E3 /* Pods-TradeSupporter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TradeSupporter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TradeSupporter/Pods-TradeSupporter.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +91,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5157218F1FF027A2007E901C /* SwiftyJSON.framework in Frameworks */,
+				515721861FF01B2B007E901C /* Gryphon.framework in Frameworks */,
+				5175573A1FEEEB9D00A59051 /* PubNub.framework in Frameworks */,
+				5157217B1FEF2925007E901C /* Charts.framework in Frameworks */,
+				5157217C1FEF29E7007E901C /* Charts.framework in Frameworks */,
+				517557391FEEEB6500A59051 /* PubNub.framework in Frameworks */,
+				29AF02D4B737F255F5268A6F /* Pods_TradeSupporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +118,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B07572605D7D39E244669B3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				515721901FF027A2007E901C /* SwiftyJSON.framework */,
+				515721871FF01B2B007E901C /* Gryphon.framework */,
+				D7CF21B556C8FF8760E28896 /* Pods_TradeSupporter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2CA78F89D5D568FAF7AB3DA5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D8DF403FE819573213BB84E3 /* Pods-TradeSupporter.debug.xcconfig */,
+				A518485EAD6F716643F14C77 /* Pods-TradeSupporter.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		515721801FF01A38007E901C /* API */ = {
+			isa = PBXGroup;
+			children = (
+				515721811FF01A45007E901C /* API.swift */,
+				5157218A1FF02094007E901C /* BitBankAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		517557371FEEEB3800A59051 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				5157217A1FEF2925007E901C /* Charts.framework */,
+				517557381FEEEB6500A59051 /* PubNub.framework */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
 		51EB313A1FEEEA2700A39A24 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +162,8 @@
 				51EB315A1FEEEA2800A39A24 /* TradeSupporterTests */,
 				51EB31651FEEEA2800A39A24 /* TradeSupporterUITests */,
 				51EB31441FEEEA2700A39A24 /* Products */,
+				2CA78F89D5D568FAF7AB3DA5 /* Pods */,
+				1B07572605D7D39E244669B3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,12 +180,15 @@
 		51EB31451FEEEA2700A39A24 /* TradeSupporter */ = {
 			isa = PBXGroup;
 			children = (
+				515721801FF01A38007E901C /* API */,
+				517557371FEEEB3800A59051 /* Framework */,
 				51EB31461FEEEA2700A39A24 /* AppDelegate.swift */,
 				51EB31481FEEEA2700A39A24 /* ViewController.swift */,
 				51EB314A1FEEEA2700A39A24 /* Main.storyboard */,
 				51EB314D1FEEEA2700A39A24 /* Assets.xcassets */,
 				51EB314F1FEEEA2700A39A24 /* LaunchScreen.storyboard */,
 				51EB31521FEEEA2700A39A24 /* Info.plist */,
+				5157217E1FF012E4007E901C /* Const.swift */,
 			);
 			path = TradeSupporter;
 			sourceTree = "<group>";
@@ -132,9 +218,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 51EB316B1FEEEA2800A39A24 /* Build configuration list for PBXNativeTarget "TradeSupporter" */;
 			buildPhases = (
+				124D463F570BFAF0244A3FBB /* [CP] Check Pods Manifest.lock */,
 				51EB313F1FEEEA2700A39A24 /* Sources */,
 				51EB31401FEEEA2700A39A24 /* Frameworks */,
 				51EB31411FEEEA2700A39A24 /* Resources */,
+				5175573C1FEEEB9D00A59051 /* Embed Frameworks */,
+				979A3C101FF9AD8D11EDB64A /* [CP] Embed Pods Frameworks */,
+				278A9ACADBC2245F6192DCB4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -254,6 +344,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		124D463F570BFAF0244A3FBB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TradeSupporter-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		278A9ACADBC2245F6192DCB4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TradeSupporter/Pods-TradeSupporter-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		979A3C101FF9AD8D11EDB64A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TradeSupporter/Pods-TradeSupporter-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Gryphon/Gryphon.framework",
+				"${BUILT_PRODUCTS_DIR}/PubNub/PubNub.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gryphon.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PubNub.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TradeSupporter/Pods-TradeSupporter-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		51EB313F1FEEEA2700A39A24 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -261,6 +411,9 @@
 			files = (
 				51EB31491FEEEA2700A39A24 /* ViewController.swift in Sources */,
 				51EB31471FEEEA2700A39A24 /* AppDelegate.swift in Sources */,
+				5157218B1FF02094007E901C /* BitBankAPI.swift in Sources */,
+				515721821FF01A45007E901C /* API.swift in Sources */,
+				5157217F1FF012E4007E901C /* Const.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,11 +577,17 @@
 		};
 		51EB316C1FEEEA2800A39A24 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8DF403FE819573213BB84E3 /* Pods-TradeSupporter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B826USK72A;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TradeSupporter/Framework",
+				);
 				INFOPLIST_FILE = TradeSupporter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mosin.jp.TradeSupporter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -439,11 +598,17 @@
 		};
 		51EB316D1FEEEA2800A39A24 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A518485EAD6F716643F14C77 /* Pods-TradeSupporter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B826USK72A;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TradeSupporter/Framework",
+				);
 				INFOPLIST_FILE = TradeSupporter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mosin.jp.TradeSupporter;
 				PRODUCT_NAME = "$(TARGET_NAME)";

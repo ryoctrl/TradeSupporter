@@ -1,0 +1,23 @@
+PODS:
+  - Alamofire (4.6.0)
+  - Gryphon (3.1.0)
+  - PubNub (4.7.1):
+    - PubNub/Core (= 4.7.1)
+  - PubNub/Core (4.7.1)
+  - SwiftyJSON (4.0.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.5)
+  - Gryphon (~> 3.1)
+  - PubNub (~> 4)
+  - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  Gryphon: 4be80ea5cd7f00421915ddce4e5c0e662ab5d5ff
+  PubNub: 214bf072f81bd809de275c2c5d5f423d79a287f2
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+
+PODFILE CHECKSUM: fd92298c3b1abfbab80d94716b9e978d7e85a022
+
+COCOAPODS: 1.3.1
