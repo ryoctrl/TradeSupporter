@@ -16,6 +16,7 @@
 		515721861FF01B2B007E901C /* Gryphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 515721871FF01B2B007E901C /* Gryphon.framework */; };
 		5157218B1FF02094007E901C /* BitBankAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5157218A1FF02094007E901C /* BitBankAPI.swift */; };
 		5157218F1FF027A2007E901C /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 515721901FF027A2007E901C /* SwiftyJSON.framework */; };
+		515721921FF0661F007E901C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515721911FF0661F007E901C /* SettingsViewController.swift */; };
 		517557391FEEEB6500A59051 /* PubNub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 517557381FEEEB6500A59051 /* PubNub.framework */; };
 		5175573A1FEEEB9D00A59051 /* PubNub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 517557381FEEEB6500A59051 /* PubNub.framework */; };
 		5175573B1FEEEB9D00A59051 /* PubNub.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 517557381FEEEB6500A59051 /* PubNub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -67,6 +68,8 @@
 		515721871FF01B2B007E901C /* Gryphon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Gryphon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5157218A1FF02094007E901C /* BitBankAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitBankAPI.swift; sourceTree = "<group>"; };
 		515721901FF027A2007E901C /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		515721911FF0661F007E901C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		515721941FF06FC3007E901C /* BTNavigationDropdownMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BTNavigationDropdownMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		517557381FEEEB6500A59051 /* PubNub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PubNub.framework; sourceTree = "<group>"; };
 		51EB31431FEEEA2700A39A24 /* TradeSupporter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradeSupporter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51EB31461FEEEA2700A39A24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +124,7 @@
 		1B07572605D7D39E244669B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				515721941FF06FC3007E901C /* BTNavigationDropdownMenu.framework */,
 				515721901FF027A2007E901C /* SwiftyJSON.framework */,
 				515721871FF01B2B007E901C /* Gryphon.framework */,
 				D7CF21B556C8FF8760E28896 /* Pods_TradeSupporter.framework */,
@@ -189,6 +193,7 @@
 				51EB314F1FEEEA2700A39A24 /* LaunchScreen.storyboard */,
 				51EB31521FEEEA2700A39A24 /* Info.plist */,
 				5157217E1FF012E4007E901C /* Const.swift */,
+				515721911FF0661F007E901C /* SettingsViewController.swift */,
 			);
 			path = TradeSupporter;
 			sourceTree = "<group>";
@@ -414,6 +419,7 @@
 				5157218B1FF02094007E901C /* BitBankAPI.swift in Sources */,
 				515721821FF01A45007E901C /* API.swift in Sources */,
 				5157217F1FF012E4007E901C /* Const.swift in Sources */,
+				515721921FF0661F007E901C /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

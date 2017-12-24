@@ -11,6 +11,7 @@ import PubNub
 import Charts
 import SwiftyJSON
 
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var chartView: CandleStickChartView!
@@ -36,6 +37,7 @@ class ViewController: UIViewController {
         
         //pubNubSetup()
         apiSetup()
+        title = "BTC/JPY"
         //chartSetup()
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -50,7 +52,7 @@ class ViewController: UIViewController {
         let api: API = BitBankAPI()
         func comp(json: JSON) -> Void {
             let data = json["data"]["candlestick"][0]["ohlcv"]
-            print(data.count)
+            //print(data.count)
             let numOfBars = 40
             let margin = data.count > numOfBars ? numOfBars : data.count
             for i in data.count-margin..<data.count {
@@ -60,7 +62,7 @@ class ViewController: UIViewController {
                 let shadowL = data[i][2].doubleValue //安値
                 let open = data[i][0].doubleValue //始値
                 let close = data[i][3].doubleValue //終値
-                print(x, shadowH, shadowL, open, close)
+                //print(x, shadowH, shadowL, open, close)
                 self.entries.append(CandleChartDataEntry(x: x, shadowH: shadowH, shadowL: shadowL, open: open, close: close))
                 self.chartSetup()
             }
@@ -71,10 +73,10 @@ class ViewController: UIViewController {
     
     func pubNubSetup() {
         let delegate = UIApplication.shared.delegate as! AppDelegate
-        let config = PNConfiguration(publishKey: Const.PubNub_BitBank["SubscribeKey"]!, subscribeKey: Const.PubNub_BitBank["SubscribeKey"]!)
+        let config = PNConfiguration(publishKey: Const.PubNub_BitBank["SubscribeKey"]! as! String, subscribeKey: Const.PubNub_BitBank["SubscribeKey"]! as! String)
         delegate.client = PubNub.clientWithConfiguration(config)
         delegate.client.addListener(delegate)
-        delegate.client.subscribeToChannels([Const.PubNub_BitBank["chart_xrp_jpy"]!], withPresence: true)
+        delegate.client.subscribeToChannels([Const.PubNub_BitBank["chart_xrp_jpy"]! as! String], withPresence: true)
     }
     
     //shadowプロパティはヒゲを表す
@@ -83,22 +85,9 @@ class ViewController: UIViewController {
         let set = CandleChartDataSet(values: self.entries, label: "XRP/JPY")
         chartView.data = CandleChartData(dataSet: set)
         
-        //表示内容の設定
-        set.shadowColorSameAsCandle = false
-        set.drawValuesEnabled = false
-    
-        
-        chartView.data = CandleChartData(dataSet: set)
-        chartView.borderLineWidth *= 2
-        
-        
-        chartView.chartDescription!.text = ""
-        //各種表示設定
+        //軸関連の表示設定
         chartView.rightAxis.drawLabelsEnabled = false
-        //chartView.drawMarkers = true
-        chartView.legend.enabled = false
         chartView.xAxis.labelPosition = .bottom
-        
         //X軸の日付表示
         class customFormatter: IAxisValueFormatter {
             func stringForValue(_ value: Double, axis: AxisBase?) -> String {
@@ -111,6 +100,16 @@ class ViewController: UIViewController {
             }
         }
         chartView.xAxis.valueFormatter = customFormatter()
+        //ロウソク足の表示設定
+        set.drawValuesEnabled = false
+        set.increasingColor = UIColor.green
+        set.decreasingColor = UIColor.red
+        set.shadowColorSameAsCandle = true
+        set.increasingFilled = true
+        set.shadowWidth /= 2
+        //グラフ全体の表示設定
+        chartView.chartDescription!.text = ""
+        chartView.legend.enabled = false
     }
 }
 
