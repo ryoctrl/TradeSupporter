@@ -17,6 +17,10 @@
 		5157218B1FF02094007E901C /* BitBankAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5157218A1FF02094007E901C /* BitBankAPI.swift */; };
 		5157218F1FF027A2007E901C /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 515721901FF027A2007E901C /* SwiftyJSON.framework */; };
 		515721921FF0661F007E901C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515721911FF0661F007E901C /* SettingsViewController.swift */; };
+		5157219A1FF07893007E901C /* SlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515721991FF07893007E901C /* SlideMenuViewController.swift */; };
+		5157219C1FF079DE007E901C /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5157219B1FF079DE007E901C /* LeftMenuViewController.swift */; };
+		5157219E1FF12DDF007E901C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5157219D1FF12DDF007E901C /* Utilities.swift */; };
+		515721A11FF1455A007E901C /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515721A01FF1455A007E901C /* UIImageExtension.swift */; };
 		517557391FEEEB6500A59051 /* PubNub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 517557381FEEEB6500A59051 /* PubNub.framework */; };
 		5175573A1FEEEB9D00A59051 /* PubNub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 517557381FEEEB6500A59051 /* PubNub.framework */; };
 		5175573B1FEEEB9D00A59051 /* PubNub.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 517557381FEEEB6500A59051 /* PubNub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -70,6 +74,10 @@
 		515721901FF027A2007E901C /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		515721911FF0661F007E901C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		515721941FF06FC3007E901C /* BTNavigationDropdownMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BTNavigationDropdownMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		515721991FF07893007E901C /* SlideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuViewController.swift; sourceTree = "<group>"; };
+		5157219B1FF079DE007E901C /* LeftMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
+		5157219D1FF12DDF007E901C /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		515721A01FF1455A007E901C /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		517557381FEEEB6500A59051 /* PubNub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PubNub.framework; sourceTree = "<group>"; };
 		51EB31431FEEEA2700A39A24 /* TradeSupporter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradeSupporter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51EB31461FEEEA2700A39A24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +158,14 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		5157219F1FF12DE9007E901C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				515721A01FF1455A007E901C /* UIImageExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		517557371FEEEB3800A59051 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +200,7 @@
 		51EB31451FEEEA2700A39A24 /* TradeSupporter */ = {
 			isa = PBXGroup;
 			children = (
+				5157219F1FF12DE9007E901C /* Extensions */,
 				515721801FF01A38007E901C /* API */,
 				517557371FEEEB3800A59051 /* Framework */,
 				51EB31461FEEEA2700A39A24 /* AppDelegate.swift */,
@@ -194,6 +211,9 @@
 				51EB31521FEEEA2700A39A24 /* Info.plist */,
 				5157217E1FF012E4007E901C /* Const.swift */,
 				515721911FF0661F007E901C /* SettingsViewController.swift */,
+				515721991FF07893007E901C /* SlideMenuViewController.swift */,
+				5157219B1FF079DE007E901C /* LeftMenuViewController.swift */,
+				5157219D1FF12DDF007E901C /* Utilities.swift */,
 			);
 			path = TradeSupporter;
 			sourceTree = "<group>";
@@ -393,6 +413,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Gryphon/Gryphon.framework",
 				"${BUILT_PRODUCTS_DIR}/PubNub/PubNub.framework",
+				"${BUILT_PRODUCTS_DIR}/SlideMenuControllerSwift/SlideMenuControllerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -400,6 +421,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gryphon.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PubNub.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlideMenuControllerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,8 +439,12 @@
 				51EB31491FEEEA2700A39A24 /* ViewController.swift in Sources */,
 				51EB31471FEEEA2700A39A24 /* AppDelegate.swift in Sources */,
 				5157218B1FF02094007E901C /* BitBankAPI.swift in Sources */,
+				515721A11FF1455A007E901C /* UIImageExtension.swift in Sources */,
 				515721821FF01A45007E901C /* API.swift in Sources */,
 				5157217F1FF012E4007E901C /* Const.swift in Sources */,
+				5157219A1FF07893007E901C /* SlideMenuViewController.swift in Sources */,
+				5157219E1FF12DDF007E901C /* Utilities.swift in Sources */,
+				5157219C1FF079DE007E901C /* LeftMenuViewController.swift in Sources */,
 				515721921FF0661F007E901C /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

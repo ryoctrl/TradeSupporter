@@ -16,9 +16,7 @@ class BitBankAPI: API {
     
   
     func setPairs(pair: String) {
-        let pairs = Const.PubNub_BitBank["Pairs"] as! [String: String]
-        //ToDo: btc_jpyの決め打ちはナンセンスでは？
-        self.pairs = pairs.keys.contains(pair) ? pairs[pair]! : "btc_jpy"
+        self.pairs = pair
     }
     
     func get(_ completion: @escaping (JSON) -> Void){
@@ -31,9 +29,15 @@ class BitBankAPI: API {
     }
     
     //APIのエンドポイントURLの組み立て
-    //ToDo: ロウソク足と足感覚と日付を動的にして
+    //ToDo: ロウソク足と足感覚と日付を動的にしてx
     func constructURL() -> String {
-        let URL: String = baseURL + "/" + pairs + "/candlestick/1hour/20171224"
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ja_JP")
+        dateFormatter.timeStyle = .none
+        dateFormatter.dateStyle = .short
+        let day = dateFormatter.string(from: Date(timeInterval: -60 * 60 * 9, since: Date())).replacingOccurrences(of: "/", with: "")
+
+        let URL: String = baseURL + "/" + pairs + "/candlestick/5min/" + day
         return URL
     }
 }

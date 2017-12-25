@@ -10,9 +10,12 @@ import UIKit
 import PubNub
 import Charts
 import SwiftyJSON
+import SlideMenuControllerSwift
 
 
 class ViewController: UIViewController {
+    
+    static var shared: ViewController?
     
     @IBOutlet weak var chartView: CandleStickChartView!
     @IBOutlet weak var controllView: UIView!
@@ -32,14 +35,28 @@ class ViewController: UIViewController {
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var orderButton: UIButton!
     
+    let api: API = BitBankAPI()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        ViewController.shared = self
         
         //pubNubSetup()
         apiSetup()
-        title = "BTC/JPY"
-        //chartSetup()
-        // Do any additional setup after loading the view, typically from a nib.
+        //title = "BTC/JPY"
+        
+        /* Slide Menu */
+        addLeftBarButtonWithImage(UIImage(named: "menu")!)
+        //NavigationBarが半透明かどうか
+        navigationController?.navigationBar.isTranslucent = false
+        //NavigationBarの色を変更します
+        navigationController?.navigationBar.barTintColor = UIColor.cyan
+        //NavigationBarに乗っている部品の色を変更します
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.topItem!.title = "BTC/JPY"
+        //バーの左側にボタンを配置します(ライブラリ特有)
+        //addLeftBarButtonWithImage(UIImage(named: "menu")!)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,10 +66,10 @@ class ViewController: UIViewController {
     
     var entries: [CandleChartDataEntry] = []
     func apiSetup() {
-        let api: API = BitBankAPI()
         func comp(json: JSON) -> Void {
+            self.entries = []
             let data = json["data"]["candlestick"][0]["ohlcv"]
-            //print(data.count)
+            //print(data)
             let numOfBars = 40
             let margin = data.count > numOfBars ? numOfBars : data.count
             for i in data.count-margin..<data.count {
@@ -81,6 +98,7 @@ class ViewController: UIViewController {
     
     //shadowプロパティはヒゲを表す
     func chartSetup() {
+        
         //ロウソク足のデータをset
         let set = CandleChartDataSet(values: self.entries, label: "XRP/JPY")
         chartView.data = CandleChartData(dataSet: set)
@@ -111,5 +129,10 @@ class ViewController: UIViewController {
         chartView.chartDescription!.text = ""
         chartView.legend.enabled = false
     }
+    
+    func setPairs(_ pairs: String) {
+        api.setPairs(pair: pairs)
+        chartView.data!.clearValues()
+        apiSetup()
+    }
 }
-

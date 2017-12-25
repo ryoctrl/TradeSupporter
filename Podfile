@@ -15,4 +15,5 @@ target 'TradeSupporter' do
     pod "Gryphon", "~> 3.1"
     pod "Alamofire", "~> 4.5"
     pod "SwiftyJSON"
+    pod "SlideMenuControllerSwift"
 end
