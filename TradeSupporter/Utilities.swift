@@ -41,6 +41,10 @@ class Utilities {
             }
         }
         
+        minutesInt.sort { $0 < $1 }
+        hoursInt.sort { $0 < $1 }
+        daysInt.sort { $0 < $1 }
+        weeksInt.sort{ $0 < $1 }
         for minute in minutesInt {
             minutes.append(String(minute) + "m")
         }

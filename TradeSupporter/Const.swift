@@ -37,4 +37,8 @@ struct Const {
             "1w": "1day"
         ]
     ]
+    
+    static let dialogues: [String:String] = [
+        "0001": "確認"
+    ]
 }

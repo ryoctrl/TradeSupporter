@@ -13,26 +13,41 @@ import SwiftyJSON
 import SlideMenuControllerSwift
 
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     static var shared: ViewController?
+    //チャート画面に表示する足の数
+    let CHART_NUM = 75
+    
+    let HIGHER_SELL = "buy"
+    let LOWER_BUY = "sell"
+    
+    let SELL_AUTO_PRICING = 0
+    let BUY_AUTO_PRICING = 1
+    
+    var higherSellPrice = ""
+    var lowerBuyPrice = ""
     
     @IBOutlet weak var chartView: CandleStickChartView!
     @IBOutlet weak var controllView: UIView!
     
-    //価格自動入力のON.OFF
-    @IBAction func autoPricingSwitchAction(_ sender: UISwitch) {
-        if sender.isOn {
-            autoPricingSelect.isEnabled = true
-        } else {
-            autoPricingSelect.isEnabled = false
-        }
-    }
+    @IBOutlet weak var autoPricingSwitch: UISwitch!
     
+    @IBOutlet weak var priceTextField: UITextField!
+    @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var autoPricingSelect: UISegmentedControl!
     
-    @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var amountLabel: UILabel!
+    @IBAction func autoPricingSelectChanged(_ sender: UISegmentedControl) {
+        if !autoPricingSwitch.isOn { return }
+        
+        //瞬時に価格を変更
+        if sender.selectedSegmentIndex == SELL_AUTO_PRICING { priceTextField.text = higherSellPrice }
+        else { priceTextField.text = lowerBuyPrice}
+    }
+    
+    var priceTextFieldInitialized = false
+    
+    
     @IBOutlet weak var orderButton: UIButton!
     
     let api: API = BitBankAPI()
@@ -41,18 +56,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         ViewController.shared = self
         
-        //pubNubSetup()
+        pubNubSetup()
         apiSetup()
-        //title = "BTC/JPY"
-        
         /* Slide Menu */
         addLeftBarButtonWithImage(UIImage(named: "menu")!)
         //NavigationBarが半透明かどうか
         navigationController?.navigationBar.isTranslucent = false
         //NavigationBarの色を変更します
-        navigationController?.navigationBar.barTintColor = UIColor.cyan
+        //navigationController?.navigationBar.barTintColor = UIColor.cyan
         //NavigationBarに乗っている部品の色を変更します
-        navigationController?.navigationBar.tintColor = UIColor.white
+        //navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.topItem!.title = "BTC/JPY"
         //バーの左側にボタンを配置します(ライブラリ特有)
         //addLeftBarButtonWithImage(UIImage(named: "menu")!)
@@ -63,37 +76,56 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
+    static var chartTimestamps: [Double] = []
     var entries: [CandleChartDataEntry] = []
     func apiSetup() {
         func comp(json: JSON) -> Void {
+            ViewController.chartTimestamps = []
             self.entries = []
             let data = json["data"]["candlestick"][0]["ohlcv"]
-            //print(data)
-            let numOfBars = 40
-            let margin = data.count > numOfBars ? numOfBars : data.count
+            let margin = data.count > CHART_NUM ? CHART_NUM : data.count
+            var count = 0
             for i in data.count-margin..<data.count {
                 let xStr = data[i][5].stringValue
-                let x = atof(String(xStr.prefix(xStr.characters.count - 3))) / 100//XAxis
+                ViewController.chartTimestamps.append(atof(String(xStr.prefix(xStr.characters.count - 3))))
+                //let xStr = data[i][5].stringValue
+                //let x = atof(String(xStr.prefix(xStr.characters.count - 3))) / 100//XAxis
                 let shadowH = data[i][1].doubleValue//高値
                 let shadowL = data[i][2].doubleValue //安値
                 let open = data[i][0].doubleValue //始値
                 let close = data[i][3].doubleValue //終値
-                //print(x, shadowH, shadowL, open, close)
-                self.entries.append(CandleChartDataEntry(x: x, shadowH: shadowH, shadowL: shadowL, open: open, close: close))
-                self.chartSetup()
+                self.entries.append(CandleChartDataEntry(x: Double(count), shadowH: shadowH, shadowL: shadowL, open: open, close: close))
+                count += 1
             }
-            
+            self.chartSetup()
         }
         api.get(comp)
     }
     
     func pubNubSetup() {
+        let subscribes: [String] = [
+//            Const.PubNub_BitBank["chart_xrp_jpy"]! as! String,
+            Const.PubNub_BitBank["ticker_xrp_jpy"]! as! String
+        ]
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let config = PNConfiguration(publishKey: Const.PubNub_BitBank["SubscribeKey"]! as! String, subscribeKey: Const.PubNub_BitBank["SubscribeKey"]! as! String)
         delegate.client = PubNub.clientWithConfiguration(config)
         delegate.client.addListener(delegate)
-        delegate.client.subscribeToChannels([Const.PubNub_BitBank["chart_xrp_jpy"]! as! String], withPresence: true)
+        delegate.client.subscribeToChannels(subscribes, withPresence: true)
+    }
+    
+    func updateOrderPrice(data: Any) {
+        let message = data as! [String: Any]
+        let data = message["data"] as! NSDictionary
+        
+        self.higherSellPrice = data[HIGHER_SELL] as! String
+        self.lowerBuyPrice = data[LOWER_BUY] as! String
+        
+        if !autoPricingSwitch.isOn { return }
+        
+        if autoPricingSelect.selectedSegmentIndex == SELL_AUTO_PRICING { priceTextField.text = higherSellPrice }
+        else { priceTextField.text = lowerBuyPrice }
     }
     
     //shadowプロパティはヒゲを表す
@@ -109,11 +141,10 @@ class ViewController: UIViewController {
         //X軸の日付表示
         class customFormatter: IAxisValueFormatter {
             func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-                //rint(value)
-                let date = Date(timeIntervalSince1970: value * 100)
+                //let date = Date(timeIntervalSince1970: value * 100)
+                let date = Date(timeIntervalSince1970: ViewController.chartTimestamps[Int(value)])
                 let formatter = DateFormatter()
                 formatter.dateFormat = "HH:mm"
-                //print(formatter.string(from: date))
                 return formatter.string(from: date)
             }
         }
@@ -132,7 +163,23 @@ class ViewController: UIViewController {
     
     func setPairs(_ pairs: String) {
         api.setPairs(pair: pairs)
+        navigationController?.navigationBar.topItem!.title = pairs.replacingOccurrences(of: "_", with: "/").uppercased()
         chartView.data!.clearValues()
         apiSetup()
+    }
+    
+    func setInterval(_ interval: String) {
+        api.setInterval(interval)
+        print(interval)
+        chartView.data!.clearValues()
+        apiSetup()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        endEditing()
+    }
+    
+    func endEditing() {
+        self.view.endEditing(true)
     }
 }

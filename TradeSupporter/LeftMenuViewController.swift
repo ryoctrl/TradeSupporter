@@ -35,6 +35,8 @@ class LeftMenuViewController: UIViewController {
         valCoinSelector.changeAllSegmentWithArray(arr: ["JPY"], initialize: true)
         let intervalKeys = Const.PubNub_BitBank["intervals"] as! [String:String]
         intervalSegmentSetting(Utilities.sortIntervales([String](intervalKeys.keys)))
+        //ToDo: 配列の順番がただしく出ない問題が解決し次第indexを変更
+        intervalSelector.selectedSegmentIndex = 3
     }
     
     //通貨ペアの基本通貨選択
@@ -54,6 +56,12 @@ class LeftMenuViewController: UIViewController {
         values = values[selectedKeyCoin!] as! [String:String]
         ViewController.shared!.setPairs(values[selectedValCoin!] as! String)
     }
+    //時間足選択
+    @IBAction func intervalChanged(_ sender: UISegmentedControl) {
+        let selectInterval = intervalSelector.titleForSegment(at: intervalSelector.selectedSegmentIndex)
+        let intervals = Const.PubNub_BitBank["intervals"] as! [String:String]
+        ViewController.shared!.setInterval(intervals[selectInterval!] as! String)
+    }
     
     func intervalSegmentSetting(_ intervals: [String: [String]]) {
         intervalSelector.removeAllSegments()
@@ -62,18 +70,4 @@ class LeftMenuViewController: UIViewController {
         intervalSelector.changeAllSegmentWithArray(arr: (intervals["days"]?.sorted())!)
         intervalSelector.changeAllSegmentWithArray(arr: (intervals["weeks"]?.sorted())!)
     }
-}
-
-extension UISegmentedControl {
-    func changeAllSegmentWithArray(arr: [String], initialize: Bool = false){
-        if initialize {
-            self.removeAllSegments()
-        }
-        for i in 0..<arr.count {
-            self.insertSegment(withTitle: arr[i], at: numberOfSegments, animated: false)
-        }
-        
-        self.selectedSegmentIndex = 0
-    }
-    
 }

@@ -12,8 +12,10 @@ import SwiftyJSON
 protocol API {
     var baseURL: String {get}
     var pairs: String{get set}
+    var interval: String{get set}
     
     func setPairs(pair: String)
+    func setInterval(_ interval: String)
     func constructURL() -> String
     func get(_ completion: @escaping (JSON) -> Void)
 }
