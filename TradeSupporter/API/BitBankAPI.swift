@@ -11,7 +11,15 @@ import Alamofire
 import SwiftyJSON
 
 class BitBankAPI: API {
+    
+    
+    static let sharedInstance = BitBankAPI()
+    
+    private init() {
+    }
+    
     var baseURL: String = "https://public.bitbank.cc"
+    var basePrivateURL: String = "https://api.bitbank.cc"
     var pairs: String = "btc_jpy"
     var interval: String = "5min"
     
@@ -30,6 +38,65 @@ class BitBankAPI: API {
             guard let obj = response.result.value else { return }
             completion(JSON(obj))
         }
+    }
+    
+    func getWithAuth(_ key: String, _ completion: @escaping (JSON) -> Void) {
+        let path = Const.PubNub_BitBank[key] as! String
+        let nonce = Utilities.createUnixtimestamp()
+        let seed = nonce + path
+        let signature = Utilities.createSignature(seed, Const.SECRET_KEY)
+        let URL = basePrivateURL + path
+        let headers: HTTPHeaders = [
+            "ACCESS-KEY": Const.TEST_APIKEY,
+            "ACCESS-NONCE": nonce,
+            "ACCESS-SIGNATURE": signature
+        ]
+        
+        Alamofire.request(URL, headers: headers).responseJSON { response in
+            guard let obj = response.result.value else { return }
+            completion(JSON(obj))
+        }
+    }
+    
+    func postWithAuth(_ key: String, _ postJson: Parameters, _ completion: @escaping (JSON) -> Void) {
+        let path = Const.PubNub_BitBank[key] as! String
+        var jsonStr: String = postJson.description
+        jsonStr = jsonStr.replacingOccurrences(of: "[", with: "{")
+        jsonStr = jsonStr.replacingOccurrences(of: "]", with: "}")
+        jsonStr = jsonStr.replacingOccurrences(of: " ", with: "")
+        let nonce = Utilities.createUnixtimestamp()
+        let seed = nonce + jsonStr
+        let signature = Utilities.createSignature(seed, Const.SECRET_KEY)
+        let URL = basePrivateURL + path
+        let headers: HTTPHeaders = [
+            "ACCESS-KEY": Const.TEST_APIKEY,
+            "ACCESS-NONCE": nonce,
+            "ACCESS-SIGNATURE": signature
+        ]
+        
+        Alamofire.request(URL, method: .post, parameters: postJson, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON{ response in
+                print(response)
+                guard let obj = response.result.value else { return }
+                completion(JSON(obj))
+        }
+    }
+    
+    func order(_ pair: String, _ amount: String, _ price: String, _ buyType: Bool, _ completion: @escaping (JSON) -> Void) {
+        var side = ""
+        if buyType {
+            side = "buy"
+        } else {
+            side = "sell"
+        }
+        let postJson: Parameters = [
+            "pair": pair,
+            "amount": "1",
+            "price": price,
+            "side": side,
+            "type": "limit"
+        ]
+        postWithAuth("order", postJson, completion)
     }
     
     //APIのエンドポイントURLの組み立て

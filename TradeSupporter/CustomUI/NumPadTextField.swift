@@ -35,16 +35,12 @@ class NumPadTextField: UITextField, UITextFieldDelegate {
     }
     
     let SCREEN_SIZE = UIScreen.main.bounds.size
-    var defaultY: CGFloat = 0.0
     @objc func keyBoardWillShow(_ notification: NSNotification) {
-        defaultY = self.superview!.superview!.frame.origin.y
-        print("defaultY set to", defaultY)
         let keyboardHeight = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.height
         self.superview!.superview!.frame.origin.y = SCREEN_SIZE.height - keyboardHeight - self.superview!.superview!.frame.height
     }
     
     @objc func keyboardWillHide(_ notification: NSNotification) {
-        print("keyboard hiding defaultY:", defaultY)
         self.superview!.superview!.frame.origin.y = 0
     }
     

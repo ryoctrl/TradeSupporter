@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:TradeSupporter/BridgingHeader.h">
+   </FileRef>
+   <FileRef
       location = "group:TradeSupporter.xcodeproj">
    </FileRef>
    <FileRef

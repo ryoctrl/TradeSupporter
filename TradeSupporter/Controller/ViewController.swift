@@ -46,11 +46,30 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     var priceTextFieldInitialized = false
+    @IBAction func orderButtonPushed(_ sender: Any) {
+        if (amountTextField.text == "") { return }
+        let price = priceTextField.text
+        let amount = amountTextField.text
+        var buyOrder = true
+        if autoPricingSelect.selectedSegmentIndex == SELL_AUTO_PRICING {
+            buyOrder = false
+        }
+        
+        func completion(_ obj: JSON) -> Void {
+            self.amountTextField.text = ""
+            RightMenuViewController.sharedInstance!.getAmounts()
+        }
+        
+        //ToDo: 通貨ペアを動的にすること
+        let pair_test = "xrp_jpy"
+        api.order(pair_test, amount!, price!, buyOrder, completion)
+    }
     
     
     @IBOutlet weak var orderButton: UIButton!
     
-    let api: API = BitBankAPI()
+    
+    let api: API = BitBankAPI.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()

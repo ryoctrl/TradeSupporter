@@ -9,6 +9,17 @@
 import Foundation
 
 class Utilities {
+    static func createSignature(_ seed: String, _ secret: String) -> String {
+        return seed.hmac(algorithm: .SHA256, key: secret)
+    }
+    
+    static func createUnixtimestamp() -> String{
+        var nonce = String(Date().timeIntervalSince1970)
+        nonce = nonce.replacingOccurrences(of: ".", with: "")
+        nonce = String(nonce.prefix(13))
+        return nonce
+    }
+    
     static func sortIntervales(_ intervals: [String]) -> [String:[String]] {
         var minutes: [String] = []
         var hours: [String] = []

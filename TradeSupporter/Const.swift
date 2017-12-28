@@ -9,10 +9,16 @@
 import Foundation
 
 struct Const {
+    //ToDo: 必ず削除
+    static let TEST_APIKEY = ""
+    static let SECRET_KEY = ""
+    
     static let PubNub_BitBank: [String:Any] = [
         "SubscribeKey": "sub-c-e12e9174-dd60-11e6-806b-02ee2ddab7fe",
         "ticker_xrp_jpy": "ticker_xrp_jpy",
         "chart_xrp_jpy": "candlestick_xrp_jpy",
+        "assets":"/v1/user/assets",
+        "order": "/v1/user/spot/order",
         "Pairs": [
             "BTC": ["JPY": "btc_jpy"],
             "XRP": ["JPY": "xrp_jpy"],

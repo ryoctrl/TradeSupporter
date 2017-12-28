@@ -27,6 +27,10 @@
 		517557391FEEEB6500A59051 /* PubNub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 517557381FEEEB6500A59051 /* PubNub.framework */; };
 		5175573A1FEEEB9D00A59051 /* PubNub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 517557381FEEEB6500A59051 /* PubNub.framework */; };
 		5175573B1FEEEB9D00A59051 /* PubNub.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 517557381FEEEB6500A59051 /* PubNub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		517C61BB1FF4E4BE0067D356 /* RightMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517C61BA1FF4E4BE0067D356 /* RightMenuViewController.swift */; };
+		517C61C31FF4EA470067D356 /* InformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517C61C11FF4EA470067D356 /* InformationCell.swift */; };
+		517C61C41FF4EA470067D356 /* InformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 517C61C21FF4EA470067D356 /* InformationCell.xib */; };
+		517C61C81FF4F9C40067D356 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517C61C71FF4F9C40067D356 /* Crypto.swift */; };
 		51EB31471FEEEA2700A39A24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EB31461FEEEA2700A39A24 /* AppDelegate.swift */; };
 		51EB31491FEEEA2700A39A24 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EB31481FEEEA2700A39A24 /* ViewController.swift */; };
 		51EB314C1FEEEA2700A39A24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51EB314A1FEEEA2700A39A24 /* Main.storyboard */; };
@@ -85,6 +89,11 @@
 		515721A01FF1455A007E901C /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		515721A21FF184F3007E901C /* UISegmentControlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISegmentControlExtension.swift; sourceTree = "<group>"; };
 		517557381FEEEB6500A59051 /* PubNub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PubNub.framework; sourceTree = "<group>"; };
+		517C61BA1FF4E4BE0067D356 /* RightMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightMenuViewController.swift; sourceTree = "<group>"; };
+		517C61C11FF4EA470067D356 /* InformationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationCell.swift; sourceTree = "<group>"; };
+		517C61C21FF4EA470067D356 /* InformationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InformationCell.xib; sourceTree = "<group>"; };
+		517C61C51FF4F8AB0067D356 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		517C61C71FF4F9C40067D356 /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		51EB31431FEEEA2700A39A24 /* TradeSupporter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradeSupporter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51EB31461FEEEA2700A39A24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51EB31481FEEEA2700A39A24 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +207,27 @@
 			path = Framework;
 			sourceTree = "<group>";
 		};
+		517C61BC1FF4E6B40067D356 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				51EB31481FEEEA2700A39A24 /* ViewController.swift */,
+				515721911FF0661F007E901C /* SettingsViewController.swift */,
+				515721991FF07893007E901C /* SlideMenuViewController.swift */,
+				5157219B1FF079DE007E901C /* LeftMenuViewController.swift */,
+				517C61BA1FF4E4BE0067D356 /* RightMenuViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		517C61C61FF4F9AD0067D356 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				5157219D1FF12DDF007E901C /* Utilities.swift */,
+				517C61C71FF4F9C40067D356 /* Crypto.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		51EB313A1FEEEA2700A39A24 = {
 			isa = PBXGroup;
 			children = (
@@ -223,22 +253,22 @@
 		51EB31451FEEEA2700A39A24 /* TradeSupporter */ = {
 			isa = PBXGroup;
 			children = (
+				517C61C61FF4F9AD0067D356 /* Utilities */,
+				517C61BC1FF4E6B40067D356 /* Controller */,
 				5131BDE21FF4B710005E7990 /* PubNub */,
 				5131BDDF1FF4AAC5005E7990 /* CustomUI */,
 				5157219F1FF12DE9007E901C /* Extensions */,
 				515721801FF01A38007E901C /* API */,
 				517557371FEEEB3800A59051 /* Framework */,
 				51EB31461FEEEA2700A39A24 /* AppDelegate.swift */,
-				51EB31481FEEEA2700A39A24 /* ViewController.swift */,
 				51EB314A1FEEEA2700A39A24 /* Main.storyboard */,
 				51EB314D1FEEEA2700A39A24 /* Assets.xcassets */,
 				51EB314F1FEEEA2700A39A24 /* LaunchScreen.storyboard */,
 				51EB31521FEEEA2700A39A24 /* Info.plist */,
 				5157217E1FF012E4007E901C /* Const.swift */,
-				515721911FF0661F007E901C /* SettingsViewController.swift */,
-				515721991FF07893007E901C /* SlideMenuViewController.swift */,
-				5157219B1FF079DE007E901C /* LeftMenuViewController.swift */,
-				5157219D1FF12DDF007E901C /* Utilities.swift */,
+				517C61C11FF4EA470067D356 /* InformationCell.swift */,
+				517C61C21FF4EA470067D356 /* InformationCell.xib */,
+				517C61C51FF4F8AB0067D356 /* BridgingHeader.h */,
 			);
 			path = TradeSupporter;
 			sourceTree = "<group>";
@@ -374,6 +404,7 @@
 			files = (
 				51EB31511FEEEA2700A39A24 /* LaunchScreen.storyboard in Resources */,
 				51EB314E1FEEEA2700A39A24 /* Assets.xcassets in Resources */,
+				517C61C41FF4EA470067D356 /* InformationCell.xib in Resources */,
 				51EB314C1FEEEA2700A39A24 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,8 +496,11 @@
 				51EB31471FEEEA2700A39A24 /* AppDelegate.swift in Sources */,
 				5157218B1FF02094007E901C /* BitBankAPI.swift in Sources */,
 				515721A11FF1455A007E901C /* UIImageExtension.swift in Sources */,
+				517C61BB1FF4E4BE0067D356 /* RightMenuViewController.swift in Sources */,
 				515721821FF01A45007E901C /* API.swift in Sources */,
+				517C61C31FF4EA470067D356 /* InformationCell.swift in Sources */,
 				5157217F1FF012E4007E901C /* Const.swift in Sources */,
+				517C61C81FF4F9C40067D356 /* Crypto.swift in Sources */,
 				5131BDE11FF4AAD4005E7990 /* NumPadTextField.swift in Sources */,
 				5157219A1FF07893007E901C /* SlideMenuViewController.swift in Sources */,
 				515721A31FF184F3007E901C /* UISegmentControlExtension.swift in Sources */,
@@ -651,6 +685,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mosin.jp.TradeSupporter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PRODUCT)/BridgingHeader.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -672,6 +707,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mosin.jp.TradeSupporter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PRODUCT)/BridgingHeader.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
