@@ -10,8 +10,8 @@ import Foundation
 
 struct Const {
     //ToDo: 必ず削除
-    static let TEST_APIKEY = ""
-    static let SECRET_KEY = ""
+    static let TEST_APIKEY = Keys.TEST_APIKEY
+    static let SECRET_KEY = Keys.SECRET_KEY
     
     static let BitBank: [String:Any] = [
         "SubscribeKey": "sub-c-e12e9174-dd60-11e6-806b-02ee2ddab7fe",
