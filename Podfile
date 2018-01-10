@@ -16,4 +16,5 @@ target 'TradeSupporter' do
     pod "Alamofire", "~> 4.5"
     pod "SwiftyJSON"
     pod "SlideMenuControllerSwift"
+    pod "RealmSwift"
 end

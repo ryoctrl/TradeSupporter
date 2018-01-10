@@ -4,6 +4,11 @@ PODS:
   - PubNub (4.7.1):
     - PubNub/Core (= 4.7.1)
   - PubNub/Core (4.7.1)
+  - Realm (3.0.2):
+    - Realm/Headers (= 3.0.2)
+  - Realm/Headers (3.0.2)
+  - RealmSwift (3.0.2):
+    - Realm (= 3.0.2)
   - SlideMenuControllerSwift (4.0.0)
   - SwiftyJSON (4.0.0)
 
@@ -11,6 +16,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.5)
   - Gryphon (~> 3.1)
   - PubNub (~> 4)
+  - RealmSwift
   - SlideMenuControllerSwift
   - SwiftyJSON
 
@@ -18,9 +24,11 @@ SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
   Gryphon: 4be80ea5cd7f00421915ddce4e5c0e662ab5d5ff
   PubNub: 214bf072f81bd809de275c2c5d5f423d79a287f2
+  Realm: 6f23fd1f178a09342eac21bfa7c2bf4312a7a180
+  RealmSwift: 695393add1b8f9d5fa75dd16e6355cf3935f71e2
   SlideMenuControllerSwift: 021d6318201c53d4d4d3710517d43d6c556c7dd0
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 7540a699c76616beff8f43bde3a128f7ffabade8
+PODFILE CHECKSUM: a90e499d0a184100abfce746d4fc92eee3807c4e
 
 COCOAPODS: 1.3.1

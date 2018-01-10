@@ -16,6 +16,8 @@ import SlideMenuControllerSwift
 class ViewController: UIViewController, UITextFieldDelegate {
     
     static var shared: ViewController?
+    
+    var pubNubController: PubNubController!
     //チャート画面に表示する足の数
     let CHART_NUM = 75
     
@@ -37,6 +39,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var autoPricingSelect: UISegmentedControl!
     
+    @IBOutlet weak var paymentLabel: UILabel!
+    @IBOutlet weak var fiatLabel: UILabel!
+    
     @IBAction func autoPricingSelectChanged(_ sender: UISegmentedControl) {
         if !autoPricingSwitch.isOn { return }
         
@@ -48,47 +53,44 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var priceTextFieldInitialized = false
     @IBAction func orderButtonPushed(_ sender: Any) {
         if (amountTextField.text == "") { return }
-        let price = priceTextField.text
-        let amount = amountTextField.text
-        var buyOrder = true
-        if autoPricingSelect.selectedSegmentIndex == SELL_AUTO_PRICING {
-            buyOrder = false
-        }
         
-        func completion(_ obj: JSON) -> Void {
-            self.amountTextField.text = ""
-            RightMenuViewController.sharedInstance!.getAmounts()
-        }
+        let alertController = UIAlertController(title: "Confirm", message:"購入確認画面 (デバッグモードにつき機能削除中)", preferredStyle: UIAlertControllerStyle.alert)
         
-        //ToDo: 通貨ペアを動的にすること
-        let pair_test = "xrp_jpy"
-        api.order(pair_test, amount!, price!, buyOrder, completion)
+        let defaultAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {action in
+            let price = self.priceTextField.text
+            let amount = self.amountTextField.text
+            var buyOrder = true
+            if self.autoPricingSelect.selectedSegmentIndex == self.SELL_AUTO_PRICING {
+                buyOrder = false
+            }
+            
+            func completion(_ obj: JSON) -> Void {
+                self.amountTextField.text = ""
+                RightMenuViewController.sharedInstance!.getAmounts()
+            }
+            //self.api.order(StaticValues.selectingPair, amount!, price!, buyOrder, completion)
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil)
+        
+        alertController.addAction(defaultAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
-    
     @IBOutlet weak var orderButton: UIButton!
-    
     
     let api: API = BitBankAPI.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ViewController.shared = self
+        self.pubNubController = PubNubController.sharedInstance
         
-        pubNubSetup()
         apiSetup()
-        /* Slide Menu */
-        addLeftBarButtonWithImage(UIImage(named: "menu")!)
-        //NavigationBarが半透明かどうか
-        navigationController?.navigationBar.isTranslucent = false
-        //NavigationBarの色を変更します
-        //navigationController?.navigationBar.barTintColor = UIColor.cyan
-        //NavigationBarに乗っている部品の色を変更します
-        //navigationController?.navigationBar.tintColor = UIColor.white
-        navigationController?.navigationBar.topItem!.title = "BTC/JPY"
-        //バーの左側にボタンを配置します(ライブラリ特有)
-        //addLeftBarButtonWithImage(UIImage(named: "menu")!)
-        
+        labelFieldTextInitialize()
+        navigationBarSetup()
     }
 
     override func didReceiveMemoryWarning() {
@@ -96,6 +98,23 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    //ナビゲーションバー関連
+    func navigationBarSetup() {
+        //addLeftBarButtonWithImage(UIImage(named: "menu")!)
+        setNavigationbarTitle("BTC/JPY")
+        navigationController?.navigationBar.isTranslucent = false
+    }
+    
+    //ナビゲーションバーに表示するタイトル(通貨ペア名)
+    private func setNavigationbarTitle(_ title: String) {
+        navigationController?.navigationBar.topItem!.title = title
+    }
+    
+    func labelFieldTextInitialize() {
+        fiatLabel.text = "0"
+        paymentLabel.text = "0"
+    }
+    
     static var chartTimestamps: [Double] = []
     var entries: [CandleChartDataEntry] = []
     func apiSetup() {
@@ -119,27 +138,48 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             self.chartSetup()
         }
-        api.get(comp)
+        api.getCandle(comp)
     }
     
-    func pubNubSetup() {
-        let subscribes: [String] = [
-//            Const.PubNub_BitBank["chart_xrp_jpy"]! as! String,
-            Const.PubNub_BitBank["ticker_xrp_jpy"]! as! String
-        ]
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let config = PNConfiguration(publishKey: Const.PubNub_BitBank["SubscribeKey"]! as! String, subscribeKey: Const.PubNub_BitBank["SubscribeKey"]! as! String)
-        delegate.client = PubNub.clientWithConfiguration(config)
-        delegate.client.addListener(delegate)
-        delegate.client.subscribeToChannels(subscribes, withPresence: true)
+    func updateLatestChart(data: Any) {
+        let message = data as! [String:Any]
+        let data = message["data"] as! NSDictionary
+        let datas = data.object(forKey: "candlestick") as! [NSDictionary]
+        datas.forEach({ data in
+            if data.object(forKey: "type") as! String == api.interval {
+                let ohlcv = (data.object(forKey: "ohlcv") as! NSArray)[0] as! NSArray
+                let timestamp = ohlcv[ohlcv.count - 1]
+                //print(type(of: timestamp), String(timestamp))
+                let latestTimestamp = ViewController.chartTimestamps[self.entries.count -  1]
+                print(Utilities.responseToUnixtime(String(describing: timestamp)), latestTimestamp)
+            }
+        })
+        
+        
+        //self.entries.popLast()
+        //chartSetup()
+        //self.entries.append(CandleChartDataEntry(x: Double(count), shadowH))
     }
-    
+    //選択中通貨ペアの価格自動設定
     func updateOrderPrice(data: Any) {
         let message = data as! [String: Any]
         let data = message["data"] as! NSDictionary
         
         self.higherSellPrice = data[HIGHER_SELL] as! String
         self.lowerBuyPrice = data[LOWER_BUY] as! String
+        
+        if !autoPricingSwitch.isOn { return }
+        
+        if autoPricingSelect.selectedSegmentIndex == SELL_AUTO_PRICING { priceTextField.text = higherSellPrice }
+        else { priceTextField.text = lowerBuyPrice }
+    }
+    
+    //JSONにて自動価格入力を実行する
+    func updateOrderPriceWithJSON(obj: JSON) {
+        let data = obj["data"]
+        
+        self.higherSellPrice = data[HIGHER_SELL].stringValue
+        self.lowerBuyPrice = data[LOWER_BUY].stringValue
         
         if !autoPricingSwitch.isOn { return }
         
@@ -160,7 +200,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         //X軸の日付表示
         class customFormatter: IAxisValueFormatter {
             func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-                //let date = Date(timeIntervalSince1970: value * 100)
+                print(Int(value), ViewController.chartTimestamps.count)
                 let date = Date(timeIntervalSince1970: ViewController.chartTimestamps[Int(value)])
                 let formatter = DateFormatter()
                 formatter.dateFormat = "HH:mm"
@@ -168,6 +208,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
         }
         chartView.xAxis.valueFormatter = customFormatter()
+        //chartView.xAxis.axisMaximum = Double(self.entries.count - CHART_NUM)
         //ロウソク足の表示設定
         set.drawValuesEnabled = false
         set.increasingColor = UIColor.green
@@ -180,20 +221,39 @@ class ViewController: UIViewController, UITextFieldDelegate {
         chartView.legend.enabled = false
     }
     
+    //通貨ペアの選択
     func setPairs(_ pairs: String) {
-        api.setPairs(pair: pairs)
-        navigationController?.navigationBar.topItem!.title = pairs.replacingOccurrences(of: "_", with: "/").uppercased()
+        StaticValues.selectingPair = pairs
+        pubNubController.changeSubscribingCurrencyPair()
+        func comp(obj: JSON) -> Void {
+            updateOrderPriceWithJSON(obj: obj)
+        }
+        api.get("ticker", comp)
+        setNavigationbarTitle(pairs.replacingOccurrences(of: "_", with: "/").uppercased())
         chartView.data!.clearValues()
         apiSetup()
     }
     
+    //チャートに表示する時間足
     func setInterval(_ interval: String) {
         api.setInterval(interval)
-        print(interval)
         chartView.data!.clearValues()
         apiSetup()
     }
     
+    //金額と数量の入力内容変更
+    @IBAction func textChanged(_ sender: Any) {
+        if amountTextField.text != "" && priceTextField.text != "" {
+            let amount = Double(amountTextField.text!)
+            let price = Double(priceTextField.text!)
+            paymentLabel.text = String(amount! * price!)
+        } else {
+            paymentLabel.text = "0"
+        }
+    }
+    
+    
+    //キーボードを画面タッチで隠す
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         endEditing()
     }

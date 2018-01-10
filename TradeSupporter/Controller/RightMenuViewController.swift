@@ -16,6 +16,11 @@ class RightMenuViewController: UIViewController, UITableViewDataSource, UITableV
     
     var amountDatas: [[String:String]] = []
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getAmounts()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         RightMenuViewController.sharedInstance = self
@@ -44,11 +49,18 @@ class RightMenuViewController: UIViewController, UITableViewDataSource, UITableV
                 currencyPair["name"] = data["asset"].string!
                 currencyPair["amount"] = data["onhand_amount"].string!
                 amountDatas.append(currencyPair)
+                if currencyPair["name"] == "jpy" {
+                    setFiatToApplication(currencyPair["amount"]!)
+                }
             }
             informationList.reloadData()
         }
-        
         BitBankAPI.sharedInstance.getWithAuth("assets", completion)
+    }
+    
+    private func setFiatToApplication(_ price: String) {
+        StaticValues.fiat = Double(price)!
+        ViewController.shared!.fiatLabel.text = String(StaticValues.fiat)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

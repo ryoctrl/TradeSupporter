@@ -29,11 +29,11 @@ class LeftMenuViewController: UIViewController {
     }
     
     func selectorSetup() {
-        let keys = Const.PubNub_BitBank["Pairs"] as! [String:Any]
+        let keys = Const.BitBank["Pairs"] as! [String:Any]
         keyCoinSelector.changeAllSegmentWithArray(arr: [String](keys.keys.sorted()), initialize: true)
         keyCoinSelector.selectedSegmentIndex = 1
         valCoinSelector.changeAllSegmentWithArray(arr: ["JPY"], initialize: true)
-        let intervalKeys = Const.PubNub_BitBank["intervals"] as! [String:String]
+        let intervalKeys = Const.BitBank["intervals"] as! [String:String]
         intervalSegmentSetting(Utilities.sortIntervales([String](intervalKeys.keys)))
         //ToDo: 配列の順番がただしく出ない問題が解決し次第indexを変更
         intervalSelector.selectedSegmentIndex = 3
@@ -42,7 +42,7 @@ class LeftMenuViewController: UIViewController {
     //通貨ペアの基本通貨選択
     @IBAction func keyCoinChanged(_ sender: UISegmentedControl) {
         let selectedCoin = sender.titleForSegment(at: sender.selectedSegmentIndex)
-        var values = Const.PubNub_BitBank["Pairs"] as! [String:Any]
+        var values = Const.BitBank["Pairs"] as! [String:Any]
         values = values[selectedCoin!] as! [String:String]
         valCoinSelector.changeAllSegmentWithArray(arr: [String](values.keys.sorted()), initialize: true)
         ViewController.shared!.setPairs(values[valCoinSelector.titleForSegment(at: valCoinSelector.selectedSegmentIndex)!] as! String)
@@ -52,14 +52,14 @@ class LeftMenuViewController: UIViewController {
     @IBAction func valCoinChanged(_ sender: UISegmentedControl) {
         let selectedValCoin = sender.titleForSegment(at: sender.selectedSegmentIndex)
         let selectedKeyCoin = keyCoinSelector.titleForSegment(at: keyCoinSelector.selectedSegmentIndex)
-        var values = Const.PubNub_BitBank["Pairs"] as! [String:Any]
+        var values = Const.BitBank["Pairs"] as! [String:Any]
         values = values[selectedKeyCoin!] as! [String:String]
         ViewController.shared!.setPairs(values[selectedValCoin!] as! String)
     }
     //時間足選択
     @IBAction func intervalChanged(_ sender: UISegmentedControl) {
         let selectInterval = intervalSelector.titleForSegment(at: intervalSelector.selectedSegmentIndex)
-        let intervals = Const.PubNub_BitBank["intervals"] as! [String:String]
+        let intervals = Const.BitBank["intervals"] as! [String:String]
         ViewController.shared!.setInterval(intervals[selectInterval!] as! String)
     }
     

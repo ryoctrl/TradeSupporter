@@ -13,10 +13,10 @@ struct Const {
     static let TEST_APIKEY = ""
     static let SECRET_KEY = ""
     
-    static let PubNub_BitBank: [String:Any] = [
+    static let BitBank: [String:Any] = [
         "SubscribeKey": "sub-c-e12e9174-dd60-11e6-806b-02ee2ddab7fe",
-        "ticker_xrp_jpy": "ticker_xrp_jpy",
         "chart_xrp_jpy": "candlestick_xrp_jpy",
+        "ticker": "/ticker",
         "assets":"/v1/user/assets",
         "order": "/v1/user/spot/order",
         "Pairs": [
@@ -40,8 +40,10 @@ struct Const {
             "4h": "4hour",
             "8h": "8hour",
             "12h": "12hour",
-            "1w": "1day"
-        ]
+            "1d": "1day",
+            "1w": "1week"
+        ],
+        //""
     ]
     
     static let dialogues: [String:String] = [

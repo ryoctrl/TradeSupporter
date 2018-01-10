@@ -9,6 +9,10 @@
 import Foundation
 
 class Utilities {
+    
+    static func responseToUnixtime(_ timestamp: String) -> Double {
+        return atof(String(timestamp.characters.count - 3))
+    }
     static func createSignature(_ seed: String, _ secret: String) -> String {
         return seed.hmac(algorithm: .SHA256, key: secret)
     }

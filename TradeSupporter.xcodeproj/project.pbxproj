@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		29AF02D4B737F255F5268A6F /* Pods_TradeSupporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7CF21B556C8FF8760E28896 /* Pods_TradeSupporter.framework */; };
 		5131BDE11FF4AAD4005E7990 /* NumPadTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5131BDE01FF4AAD4005E7990 /* NumPadTextField.swift */; };
-		5131BDE61FF4B7DD005E7990 /* RealtimeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5131BDE51FF4B7DC005E7990 /* RealtimeAPI.swift */; };
 		5157217B1FEF2925007E901C /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5157217A1FEF2925007E901C /* Charts.framework */; };
 		5157217C1FEF29E7007E901C /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5157217A1FEF2925007E901C /* Charts.framework */; };
 		5157217D1FEF29E7007E901C /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5157217A1FEF2925007E901C /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -31,6 +30,9 @@
 		517C61C31FF4EA470067D356 /* InformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517C61C11FF4EA470067D356 /* InformationCell.swift */; };
 		517C61C41FF4EA470067D356 /* InformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 517C61C21FF4EA470067D356 /* InformationCell.xib */; };
 		517C61C81FF4F9C40067D356 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517C61C71FF4F9C40067D356 /* Crypto.swift */; };
+		51D9578B1FF5A6C200D7D81C /* StaticValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D9578A1FF5A6C200D7D81C /* StaticValues.swift */; };
+		51D9578E1FF5AE7A00D7D81C /* PubNubController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D9578D1FF5AE7A00D7D81C /* PubNubController.swift */; };
+		51D957902005EA5D00D7D81C /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D9578F2005EA5D00D7D81C /* keys.swift */; };
 		51EB31471FEEEA2700A39A24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EB31461FEEEA2700A39A24 /* AppDelegate.swift */; };
 		51EB31491FEEEA2700A39A24 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EB31481FEEEA2700A39A24 /* ViewController.swift */; };
 		51EB314C1FEEEA2700A39A24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51EB314A1FEEEA2700A39A24 /* Main.storyboard */; };
@@ -74,7 +76,6 @@
 
 /* Begin PBXFileReference section */
 		5131BDE01FF4AAD4005E7990 /* NumPadTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumPadTextField.swift; sourceTree = "<group>"; };
-		5131BDE51FF4B7DC005E7990 /* RealtimeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeAPI.swift; sourceTree = "<group>"; };
 		5157217A1FEF2925007E901C /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Charts.framework; sourceTree = "<group>"; };
 		5157217E1FF012E4007E901C /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		515721811FF01A45007E901C /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -94,6 +95,9 @@
 		517C61C21FF4EA470067D356 /* InformationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InformationCell.xib; sourceTree = "<group>"; };
 		517C61C51FF4F8AB0067D356 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		517C61C71FF4F9C40067D356 /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
+		51D9578A1FF5A6C200D7D81C /* StaticValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticValues.swift; sourceTree = "<group>"; };
+		51D9578D1FF5AE7A00D7D81C /* PubNubController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubNubController.swift; sourceTree = "<group>"; };
+		51D9578F2005EA5D00D7D81C /* keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keys.swift; sourceTree = "<group>"; };
 		51EB31431FEEEA2700A39A24 /* TradeSupporter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradeSupporter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51EB31461FEEEA2700A39A24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51EB31481FEEEA2700A39A24 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 		5131BDE21FF4B710005E7990 /* PubNub */ = {
 			isa = PBXGroup;
 			children = (
+				51D9578D1FF5AE7A00D7D81C /* PubNubController.swift */,
 			);
 			path = PubNub;
 			sourceTree = "<group>";
@@ -184,7 +189,6 @@
 			children = (
 				515721811FF01A45007E901C /* API.swift */,
 				5157218A1FF02094007E901C /* BitBankAPI.swift */,
-				5131BDE51FF4B7DC005E7990 /* RealtimeAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -228,6 +232,15 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		51D957891FF5A55800D7D81C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				517C61C11FF4EA470067D356 /* InformationCell.swift */,
+				517C61C21FF4EA470067D356 /* InformationCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		51EB313A1FEEEA2700A39A24 = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +266,7 @@
 		51EB31451FEEEA2700A39A24 /* TradeSupporter */ = {
 			isa = PBXGroup;
 			children = (
+				51D957891FF5A55800D7D81C /* Cell */,
 				517C61C61FF4F9AD0067D356 /* Utilities */,
 				517C61BC1FF4E6B40067D356 /* Controller */,
 				5131BDE21FF4B710005E7990 /* PubNub */,
@@ -266,9 +280,9 @@
 				51EB314F1FEEEA2700A39A24 /* LaunchScreen.storyboard */,
 				51EB31521FEEEA2700A39A24 /* Info.plist */,
 				5157217E1FF012E4007E901C /* Const.swift */,
-				517C61C11FF4EA470067D356 /* InformationCell.swift */,
-				517C61C21FF4EA470067D356 /* InformationCell.xib */,
 				517C61C51FF4F8AB0067D356 /* BridgingHeader.h */,
+				51D9578A1FF5A6C200D7D81C /* StaticValues.swift */,
+				51D9578F2005EA5D00D7D81C /* keys.swift */,
 			);
 			path = TradeSupporter;
 			sourceTree = "<group>";
@@ -469,6 +483,8 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Gryphon/Gryphon.framework",
 				"${BUILT_PRODUCTS_DIR}/PubNub/PubNub.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SlideMenuControllerSwift/SlideMenuControllerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -477,6 +493,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gryphon.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PubNub.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlideMenuControllerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -497,14 +515,16 @@
 				5157218B1FF02094007E901C /* BitBankAPI.swift in Sources */,
 				515721A11FF1455A007E901C /* UIImageExtension.swift in Sources */,
 				517C61BB1FF4E4BE0067D356 /* RightMenuViewController.swift in Sources */,
+				51D9578B1FF5A6C200D7D81C /* StaticValues.swift in Sources */,
+				51D9578E1FF5AE7A00D7D81C /* PubNubController.swift in Sources */,
 				515721821FF01A45007E901C /* API.swift in Sources */,
 				517C61C31FF4EA470067D356 /* InformationCell.swift in Sources */,
+				51D957902005EA5D00D7D81C /* keys.swift in Sources */,
 				5157217F1FF012E4007E901C /* Const.swift in Sources */,
 				517C61C81FF4F9C40067D356 /* Crypto.swift in Sources */,
 				5131BDE11FF4AAD4005E7990 /* NumPadTextField.swift in Sources */,
 				5157219A1FF07893007E901C /* SlideMenuViewController.swift in Sources */,
 				515721A31FF184F3007E901C /* UISegmentControlExtension.swift in Sources */,
-				5131BDE61FF4B7DD005E7990 /* RealtimeAPI.swift in Sources */,
 				5157219E1FF12DDF007E901C /* Utilities.swift in Sources */,
 				5157219C1FF079DE007E901C /* LeftMenuViewController.swift in Sources */,
 				515721921FF0661F007E901C /* SettingsViewController.swift in Sources */,
