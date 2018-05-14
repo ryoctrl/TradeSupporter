@@ -122,13 +122,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
             ViewController.chartTimestamps = []
             self.entries = []
             let data = json["data"]["candlestick"][0]["ohlcv"]
-            let margin = data.count > CHART_NUM ? CHART_NUM : data.count
+            //let margin = data.count > CHART_NUM ? CHART_NUM : data.count
+            let margin = data.count
             var count = 0
             for i in data.count-margin..<data.count {
                 let xStr = data[i][5].stringValue
                 ViewController.chartTimestamps.append(atof(String(xStr.prefix(xStr.characters.count - 3))))
-                //let xStr = data[i][5].stringValue
-                //let x = atof(String(xStr.prefix(xStr.characters.count - 3))) / 100//XAxis
                 let shadowH = data[i][1].doubleValue//高値
                 let shadowL = data[i][2].doubleValue //安値
                 let open = data[i][0].doubleValue //始値
@@ -141,24 +140,43 @@ class ViewController: UIViewController, UITextFieldDelegate {
         api.getCandle(comp)
     }
     
+    //リアルタイムAPIによるチャートの更新
     func updateLatestChart(data: Any) {
         let message = data as! [String:Any]
         let data = message["data"] as! NSDictionary
         let datas = data.object(forKey: "candlestick") as! [NSDictionary]
+        
         datas.forEach({ data in
             if data.object(forKey: "type") as! String == api.interval {
-                let ohlcv = (data.object(forKey: "ohlcv") as! NSArray)[0] as! NSArray
-                let timestamp = ohlcv[ohlcv.count - 1]
-                //print(type(of: timestamp), String(timestamp))
-                let latestTimestamp = ViewController.chartTimestamps[self.entries.count -  1]
-                print(Utilities.responseToUnixtime(String(describing: timestamp)), latestTimestamp)
+                do {
+                    let ohlcv = try (data.object(forKey: "ohlcv") as! NSArray)[0] as! NSArray
+                    let timestampStr = String(describing: ohlcv[ohlcv.count - 1])
+                    let timestamp = atof(String(timestampStr.prefix(timestampStr.characters.count - 3)))
+                    
+                    let shadowH = atof(ohlcv[1] as! String)
+                    let shadowL = atof(ohlcv[2] as! String)
+                    let open = atof(ohlcv[0] as! String)
+                    let close = atof(ohlcv[3] as! String)
+                    
+                    if(ViewController.chartTimestamps.count < 1) { return }
+
+                    let latestTimestamp = ViewController.chartTimestamps[ViewController.chartTimestamps.count - 1]
+                    
+                    //print(timestamp,latestTimestamp)
+                    if timestamp == latestTimestamp {
+                        _ = self.entries.popLast()
+                    } else {
+                        ViewController.chartTimestamps.append(timestamp)
+                    }
+                    let count = self.entries.count
+                    self.entries.append(CandleChartDataEntry(x: Double(count), shadowH: shadowH, shadowL: shadowL, open: open, close: close))
+                   
+                    self.chartSetup()
+                } catch {
+                    print("NSArray Error")
+                }
             }
         })
-        
-        
-        //self.entries.popLast()
-        //chartSetup()
-        //self.entries.append(CandleChartDataEntry(x: Double(count), shadowH))
     }
     //選択中通貨ペアの価格自動設定
     func updateOrderPrice(data: Any) {
@@ -200,7 +218,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         //X軸の日付表示
         class customFormatter: IAxisValueFormatter {
             func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-                print(Int(value), ViewController.chartTimestamps.count)
+                if ViewController.chartTimestamps.count < Int(value - 1) { return "e"}
                 let date = Date(timeIntervalSince1970: ViewController.chartTimestamps[Int(value)])
                 let formatter = DateFormatter()
                 formatter.dateFormat = "HH:mm"
@@ -209,6 +227,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         chartView.xAxis.valueFormatter = customFormatter()
         //chartView.xAxis.axisMaximum = Double(self.entries.count - CHART_NUM)
+        
+        chartView.setVisibleXRangeMinimum(Double(CHART_NUM))
+        chartView.setVisibleXRangeMaximum(Double(CHART_NUM))
+        
+        //現在価格の表示
+        chartView.rightAxis.removeAllLimitLines()
+        let current = self.entries[self.entries.count - 1].close
+        let line = ChartLimitLine(limit: current, label: String(current))
+        chartView.rightAxis.addLimitLine(line)
+        chartView.rightAxis.enabled = true
+        
+        chartView.xAxis.axisMaximum = Double(ViewController.chartTimestamps.count)
+        
         //ロウソク足の表示設定
         set.drawValuesEnabled = false
         set.increasingColor = UIColor.green

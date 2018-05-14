@@ -29,17 +29,18 @@ class PubNubController {
     
     func addSubscribe() {
         let pairTickerChannel = "ticker_" + subscribingPair
+        let pairChartChannel = "candlestick_" + subscribingPair
         let subscribes: [String] = [
-            Const.BitBank["chart_xrp_jpy"]! as! String,
-            //Const.BitBank[pairTickerChannel]! as! String
-            pairTickerChannel
+            pairTickerChannel,
+            pairChartChannel,
         ]        
         delegate.client.subscribeToChannels(subscribes, withPresence: true)
     }
     
     func changeSubscribingCurrencyPair(){
-        let currentPairChannel = "ticker_" + subscribingPair
-        delegate.client.unsubscribeFromChannels([currentPairChannel], withPresence: false)
+        let currentPairTicker = "ticker_" + subscribingPair
+        let currentPairChart = "candlestick_" + subscribingPair
+        delegate.client.unsubscribeFromChannels([currentPairTicker, currentPairChart], withPresence: false)
         self.subscribingPair = StaticValues.selectingPair
         addSubscribe()
     }

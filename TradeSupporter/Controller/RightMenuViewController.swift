@@ -77,7 +77,7 @@ class RightMenuViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = self.informationList.cellForRow(at: indexPath) as! InformationCell
+        //let cell = self.informationList.cellForRow(at: indexPath) as! InformationCell
         
         informationList.deselectRow(at: indexPath, animated: true)
     }

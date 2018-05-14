@@ -60,9 +60,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNObjectEventListener {
             ViewController.shared!.updateOrderPrice(data: message.data.message)
         }
         
-//        if message.data.channel.contains("candlestick") {
-//            ViewController.shared!.updateLatestChart(data: message.data.message)
-//        }
+        if message.data.channel.contains("candlestick") {
+            ViewController.shared!.updateLatestChart(data: message.data.message)
+        }
+        
+        
     }
     
     // New presence event handling.
